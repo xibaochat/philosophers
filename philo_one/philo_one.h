@@ -16,20 +16,20 @@ typedef struct s_fork
 
 typedef struct      s_phi
 {
+	int wait;
     int phi_id;
     t_fork* left_fork;
     t_fork* right_fork;
-    t_fork* fork;
-	t_fork** fork_info;
+	t_fork* fork_info;
 	struct s_phi   *head;
     struct s_phi   *next;
 	pthread_t thread;
 }                   t_phi;
 
 t_fork* init_fork(int nb);
-
-void init_phi_fork(int nb, t_fork **fork_info, int i, t_phi **current_node);
 t_phi* create_node_list();
+void init_phi_fork(int nb, t_fork *fork_info, int i, t_phi *current_node);
+t_phi* create_node_list(t_fork *fork_info, int nb);
 
 
 
