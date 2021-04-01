@@ -3,26 +3,64 @@
 void *job(void *arg)
 {
 	t_phi *phi_i;
+	int rv0;
+	int rv1;
 
 	phi_i = (t_phi *)arg;
-	pthread_mutex_lock(&(phi_i->left_fork->mutex));
-	printf("%d is eating\n", phi_i->phi_id);
-	sleep(phi_i->wait);
-	pthread_mutex_unlock(&(phi_i->left_fork->mutex));
-	printf("%d finish eating\n", phi_i->phi_id);
-	pthread_exit(NULL);
+	if (phi_i->phi_id % 2)
+	{
+		rv0 = pthread_mutex_lock(&(phi_i->left_fork->mutex));
+		if (!rv0)
+		{
+			rv1 = pthread_mutex_lock(&(phi_i->right_fork->mutex));
+			if (!rv1)
+			{
+				printf("success %d is eating\n", phi_i->phi_id);
+				sleep(1);
+				pthread_mutex_unlock(&(phi_i->right_fork->mutex));
+				pthread_mutex_unlock(&(phi_i->left_fork->mutex));
+				printf("the guy:%d, finish\n", phi_i->phi_id);
+			}
+			else
+				pthread_mutex_unlock(&(phi_i->left_fork->mutex));
+		}
+		else
+			pthread_mutex_unlock(&(phi_i->left_fork->mutex));
+	}
+	else
+	{
+		rv0 = pthread_mutex_lock(&(phi_i->right_fork->mutex));
+		if (!rv0)
+		{
+			rv1 = pthread_mutex_lock(&(phi_i->left_fork->mutex));
+			if (!rv1)
+			{
+				printf("success %d is eating\n", phi_i->phi_id);
+				sleep(1);
+				pthread_mutex_unlock(&(phi_i->left_fork->mutex));
+				pthread_mutex_unlock(&(phi_i->right_fork->mutex));
+				printf("the guy:%d, finish\n", phi_i->phi_id);
+			}
+			else
+				pthread_mutex_unlock(&(phi_i->right_fork->mutex));
+		}
+		else
+			pthread_mutex_unlock(&(phi_i->right_fork->mutex));
+	}
 	return NULL;
 }
 
-int main()
+int main(int ac, char **av)
 {
-	int i = 0;
-	int nb = 5;
+	(void) ac;
+	int nb;
 	t_phi *tmp;
 	int wait_time = 5;
 	t_fork *fork_info;
 	t_phi *head;
+	int i;
 
+	nb = ft_atoi(av[1]);
 	fork_info = init_fork(nb);
 	head = create_node_list(fork_info, nb);
 	tmp = head;
@@ -50,9 +88,10 @@ int main()
 	i = 0;
 	while (i < nb)
 	{
-		pthread_mutex_destroy(&(tmp->fork_info[i].mutex));
+		pthread_mutex_destroy(&(fork_info[i].mutex));
 		i++;
 	}
 	write(0, "ici2\n", 5);
+	ft_free_var(head, fork_info);
 	return (0);
 }

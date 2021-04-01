@@ -39,3 +39,17 @@ int			ft_atoi(const char *s)
 	}
 	return (sign * res);
 }
+
+void ft_free_var(t_phi *head, t_fork *fork)
+{
+	t_phi *tmp;
+
+	while (head)
+	{
+		tmp = head->next;
+		head->next = NULL;
+		free(head);
+		head = tmp;
+	}
+	free(fork);
+}

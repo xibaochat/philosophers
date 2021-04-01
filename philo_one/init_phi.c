@@ -12,7 +12,6 @@ t_phi* create_node_list(t_fork *fork_info, int nb)
 	while (i < nb)
 	{
 		current_node = (t_phi *)malloc(sizeof(t_phi));
-		current_node->fork_info = fork_info;
 		current_node->phi_id = i;
 		init_phi_fork(nb, fork_info, i, current_node);
 		current_node->next = NULL;
