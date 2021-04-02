@@ -1,8 +1,9 @@
 NAME = philo_one
 
-SRC =  main.c init_fork.c  init_phi.c  util.c
+SRC =  main.c init_fork.c  init_phi.c  util.c  input_validation.c \
+		util2.c tmp.c
 
-CFLAGS = -Wall -Wextra -Werror
+#CFLAGS = -Wall -Wextra -Werror
 
 OBJ = $(SRC:.c=.o)
 

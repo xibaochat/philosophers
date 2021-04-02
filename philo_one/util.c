@@ -15,7 +15,7 @@ static int	get_start_index(char *str)
 	return (i);
 }
 
-int			ft_atoi(const char *s)
+int	ft_atoi(const char *s)
 {
 	int		sign;
 	int		res;
@@ -40,9 +40,9 @@ int			ft_atoi(const char *s)
 	return (sign * res);
 }
 
-void ft_free_var(t_phi *head, t_fork *fork)
+void	ft_free_var(t_phi *head, t_fork *fork)
 {
-	t_phi *tmp;
+	t_phi	*tmp;
 
 	while (head)
 	{
@@ -52,4 +52,16 @@ void ft_free_var(t_phi *head, t_fork *fork)
 		head = tmp;
 	}
 	free(fork);
+}
+
+size_t		ft_strlen(const char *str)
+{
+	size_t	i;
+	size_t	lens;
+
+	i = -1;
+	lens = 0;
+	while (str[++i])
+		lens++;
+	return (lens);
 }
