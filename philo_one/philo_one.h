@@ -33,7 +33,7 @@ typedef struct s_fork
 	pthread_mutex_t	mutex;
 }					t_fork;
 
-typedef struct s_stimu
+typedef struct s_simu
 {
 	int				die_time;
 	int				time_spend_eat;
@@ -41,7 +41,7 @@ typedef struct s_stimu
 	int				nb_times_eat;
 	unsigned long	start_time;
 	int				has_death;
-}				t_stimu;
+}				t_simu;
 
 typedef struct s_phi
 {
@@ -54,11 +54,11 @@ typedef struct s_phi
 	pthread_t		thread;
 	unsigned long	last_meal;
 	int				actual_eat_time;
-	t_stimu			*stimu;
+	t_simu			*simu;
 }				t_phi;
 
 t_fork			*init_fork(int nb);
-t_phi			*create_node_list(t_fork *f, int n, char **av, t_stimu *s);
+t_phi			*create_node_list(t_fork *f, int n, char **av, t_simu *s);
 int				ft_atoi(const char *s);
 void			init_phi_fork(int nb, t_fork *f, int i, t_phi *current_node);
 void			ft_free_var(t_phi *head, t_fork *fork);
@@ -68,8 +68,8 @@ int				ft_isdigit(int c);
 void			show_err_message(char *str);
 long unsigned	get_actual_time(void);
 void			*job(void *arg);
-void			init_stimulation_info(t_stimu *sti, char **av);
-t_stimu			*init_stimu_thread(char **av);
+void			init_simulation_info(t_simu *sti, char **av);
+t_simu			*init_simu_thread(char **av);
 long unsigned	get_actual_time(void);
 long unsigned	get_timestamp(long unsigned start_time);
 

@@ -1,6 +1,6 @@
 #include "philo_one.h"
 
-void	init_stimulation_info(t_stimu *sti, char **av)
+void	init_simulation_info(t_simu *sti, char **av)
 {
 	sti->die_time = ft_atoi(av[2]);
 	sti->time_spend_eat = ft_atoi(av[3]);
@@ -12,15 +12,15 @@ void	init_stimulation_info(t_stimu *sti, char **av)
 	sti->has_death = 0;
 }
 
-t_stimu	*init_stimu_thread(char **av)
+t_simu	*init_simu_thread(char **av)
 {
 	unsigned long	start_time;
-	t_stimu			*phi_stimu;
+	t_simu			*phi_simu;
 
-	phi_stimu = (t_stimu *)malloc(sizeof(t_stimu));
-	phi_stimu->start_time = get_actual_time();
-	init_stimulation_info(phi_stimu, av);
-	return (phi_stimu);
+	phi_simu = (t_simu *)malloc(sizeof(t_simu));
+	phi_simu->start_time = get_actual_time();
+	init_simulation_info(phi_simu, av);
+	return (phi_simu);
 }
 
 void	ft_create_thread(t_phi *phi)
@@ -39,7 +39,7 @@ int	main(int ac, char **av)
 	t_phi	*tmp;
 	t_fork	*fork_info;
 	t_phi	*head;
-	t_stimu	*phi_stimu;
+	t_simu	*phi_simu;
 	int		v;
 
 	v = valid_input(ac, av);
@@ -47,8 +47,8 @@ int	main(int ac, char **av)
 		return (0);
 	nb = ft_atoi(av[1]);
 	fork_info = init_fork(nb);
-	phi_stimu = init_stimu_thread(av);
-	head = create_node_list(fork_info, nb, av, phi_stimu);
+	phi_simu = init_simu_thread(av);
+	head = create_node_list(fork_info, nb, av, phi_simu);
 	ft_create_thread(head);
 	tmp = head;
 	while (tmp)
@@ -64,6 +64,6 @@ int	main(int ac, char **av)
 	}
 	write(0, "ici2\n", 5);
 	/* ft_free_var(head, fork_info); */
-	/* free(phi_stimu); */
+	/* free(phi_simu); */
 	return (0);
 }

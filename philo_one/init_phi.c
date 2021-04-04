@@ -17,7 +17,7 @@ void	init_phi_fork(int nb, t_fork *fork_info, int i, t_phi *node)
 	printf("in the func init_phi_fork:L:%d R:%d\n", node->left_fork->id, node->right_fork->id);
 }
 
-t_phi	*create_node_list(t_fork *fork_info, int nb, char **av, t_stimu *stimu)
+t_phi	*create_node_list(t_fork *fork_info, int nb, char **av, t_simu *simu)
 {
 	int		i;
 	t_phi	*prev;
@@ -29,7 +29,7 @@ t_phi	*create_node_list(t_fork *fork_info, int nb, char **av, t_stimu *stimu)
 	while (i < nb)
 	{
 		current_node = (t_phi *)malloc(sizeof(t_phi));
-		current_node->stimu = init_stimu_thread(av);
+		current_node->simu = init_simu_thread(av);
 		current_node->phi_id = i;
 		current_node->actual_eat_time = 0;
 		init_phi_fork(nb, fork_info, i, current_node);
