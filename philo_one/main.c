@@ -53,7 +53,7 @@ int	main(int ac, char **av)
 	tmp = head;
 	while (tmp)
 	{
-		pthread_detach(tmp->thread);
+		pthread_join(tmp->thread, NULL);
 		tmp = tmp->next;
 	}
 	i = 0;
