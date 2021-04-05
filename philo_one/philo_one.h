@@ -35,7 +35,7 @@ typedef struct s_fork
 
 typedef struct s_simu
 {
-	int				die_time;
+	unsigned long	die_time;
 	int				time_spend_eat;
 	int				time_spend_sleep;
 	int				nb_times_eat;
@@ -66,11 +66,11 @@ size_t			ft_strlen(const char *str);
 int				valid_input(int ac, char **av);
 int				ft_isdigit(int c);
 void			show_err_message(char *str);
-long unsigned	get_actual_time(void);
+unsigned long	get_actual_time(void);
 void			*job(void *arg);
 void			init_simulation_info(t_simu *sti, char **av);
 t_simu			*init_simu_thread(char **av);
-long unsigned	get_actual_time(void);
-long unsigned	get_timestamp(long unsigned start_time);
+unsigned long	get_actual_time(void);
+unsigned long	get_timestamp(unsigned long start_time);
 
 #endif

@@ -2,7 +2,7 @@
 
 void	init_simulation_info(t_simu *sti, char **av)
 {
-	sti->die_time = ft_atoi(av[2]);
+	sti->die_time = (unsigned long)(ft_atoi(av[2]));
 	sti->time_spend_eat = ft_atoi(av[3]);
 	sti->time_spend_sleep = ft_atoi(av[4]);
 	if (av[5])
@@ -62,7 +62,7 @@ int	main(int ac, char **av)
 		pthread_mutex_destroy(&(fork_info[i].mutex));
 		i++;
 	}
-	write(0, "ici2\n", 5);
+	/* write(0, "ici2\n", 5); */
 	/* ft_free_var(head, fork_info); */
 	/* free(phi_simu); */
 	return (0);

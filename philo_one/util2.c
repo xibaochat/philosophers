@@ -1,6 +1,6 @@
 #include "philo_one.h"
 
-long unsigned   get_actual_time(void)
+unsigned long   get_actual_time(void)
 {
     struct timeval actual;
 
@@ -8,12 +8,12 @@ long unsigned   get_actual_time(void)
     return (actual.tv_sec * 1000 + actual.tv_usec / 1000);
 }
 
-long unsigned   get_time_diff(long unsigned a, long unsigned b)
+unsigned long   get_time_diff(unsigned long a, unsigned long b)
 {
     return (a - b);
 }
 
-long unsigned   get_timestamp(long unsigned start_time)
+unsigned long   get_timestamp(unsigned long start_time)
 {
     return (get_time_diff(get_actual_time(), start_time));
 }
