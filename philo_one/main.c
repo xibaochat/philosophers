@@ -29,6 +29,7 @@ void	ft_create_thread(t_phi *phi)
 	{
 		pthread_create(&phi->thread, NULL, &job, phi);
 		phi = phi->next;
+		usleep(70);
 	}
 }
 

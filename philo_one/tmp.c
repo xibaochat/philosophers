@@ -50,7 +50,7 @@ int	eat(t_phi *phi_i, t_fork  *current, t_fork  *next)
 	if (died_before_first_meal(phi_i, s_t) || died_before_next_meal(phi_i, s_t))
 	{
 		if (!someone_died(phi_i))
-			printf("FIRST %ld %d is dead\n", get_timestamp(s_t), phi_i->phi_id + 1);
+			printf("FIRST %ld %d died\n", get_timestamp(s_t), phi_i->phi_id + 1);
 		phi_i->simu->has_death = 1;
 		/* printf("ALREADY DEAD\n"); */
 		pthread_mutex_unlock(&(current->mutex));
@@ -65,7 +65,7 @@ int	eat(t_phi *phi_i, t_fork  *current, t_fork  *next)
 	if (died_before_first_meal(phi_i, s_t) || died_before_next_meal(phi_i, s_t))
 	{
 		if (!someone_died(phi_i))
-			printf("SCD %ld %d is dead\n", get_timestamp(s_t), phi_i->phi_id + 1);
+			printf("SCD %ld %d is died\n", get_timestamp(s_t), phi_i->phi_id + 1);
 		phi_i->simu->has_death = 1;
 		/* printf("ALREADY DEAD\n"); */
 		pthread_mutex_unlock(&(current->mutex));
@@ -81,10 +81,12 @@ int	eat(t_phi *phi_i, t_fork  *current, t_fork  *next)
 	usleep(phi_i->simu->time_spend_eat * 1000);
 	/* printf("%ld %d is DONE eating\n", get_timestamp(s_t), phi_i->phi_id + 1); */
 
-	printf("%ld %d is sleeping\n", get_timestamp(s_t), phi_i->phi_id + 1);
 	pthread_mutex_unlock(&(current->mutex));
 	pthread_mutex_unlock(&(next->mutex));
 	phi_i->actual_eat_time++;
+	if (someone_died(phi_i))
+		return (0);
+	printf("%ld %d is sleeping\n", get_timestamp(s_t), phi_i->phi_id + 1);
 
 	/* usleep((useconds_t)(phi_i->simu->time_spend_sleep) * 1000); */
 	usleep(phi_i->simu->time_spend_sleep * 1000);
