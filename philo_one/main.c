@@ -8,7 +8,7 @@ void	init_simulation_info(t_simu *sti, char **av)
 	if (av[5])
 		sti->nb_times_eat = ft_atoi(av[5]);
 	else
-		sti->nb_times_eat = 0;
+		sti->nb_times_eat = -1;
 	sti->has_death = 0;
 }
 
