@@ -40,10 +40,12 @@ int	ft_atoi(const char *s)
 	return (sign * res);
 }
 
-void	ft_free_var(t_phi *head, t_fork *fork)
+void	ft_free_var(t_phi *head, pthread_mutex_t *fork)
 {
 	t_phi	*tmp;
 
+	head->simu = NULL;
+	free(head->simu);
 	while (head)
 	{
 		tmp = head->next;

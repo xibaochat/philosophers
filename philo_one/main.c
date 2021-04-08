@@ -29,7 +29,6 @@ void	ft_create_thread(t_phi *phi)
 	{
 		pthread_create(&phi->thread, NULL, &job, phi);
 		phi = phi->next;
-		usleep(70);
 	}
 }
 
@@ -38,18 +37,18 @@ int	main(int ac, char **av)
 	int		i;
 	int		nb;
 	t_phi	*tmp;
-	t_fork	*fork_info;
 	t_phi	*head;
 	t_simu	*phi_simu;
 	int		v;
+	pthread_mutex_t *fork;
 
 	v = valid_input(ac, av);
 	if (v)
 		return (0);
 	nb = ft_atoi(av[1]);
-	fork_info = init_fork(nb);
 	phi_simu = init_simu_thread(av);
-	head = create_node_list(fork_info, nb, av, phi_simu);
+	fork = init_mutex_fork(nb);
+	head = create_node_list(fork, nb, av, phi_simu);
 	ft_create_thread(head);
 	tmp = head;
 	while (tmp)
@@ -60,7 +59,7 @@ int	main(int ac, char **av)
 	i = 0;
 	while (i < nb)
 	{
-		pthread_mutex_destroy(&(fork_info[i].mutex));
+		pthread_mutex_destroy(&fork[i]);
 		i++;
 	}
 	/* write(0, "ici2\n", 5); */

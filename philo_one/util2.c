@@ -22,3 +22,8 @@ int				ft_isdigit(int c)
 {
 	return (c >= 48 && c <= 57);
 }
+
+void	show_dead_message(int id, unsigned long s_t)
+{
+	printf("ID is %d, %ld died\n", id, get_timestamp(s_t));
+}
