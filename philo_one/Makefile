@@ -1,7 +1,10 @@
 NAME = philo_one
 
-SRC =  main.c  init_phi.c  util.c  input_validation.c \
-		util2.c tmp.c eat.c dead.c
+SRC =	init_fork.c init_simu.c main.c init_phi.c \
+		input_validation.c util.c time.c show_message.c \
+		job.c get_two_fork.c job_action.c monitoring.c \
+		free_var.c
+
 
 #CFLAGS = -Wall -Wextra -Werror
 

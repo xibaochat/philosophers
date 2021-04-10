@@ -34,19 +34,15 @@ int	eating_time_gap_more_than_given_time(t_phi *phi_i)
 	unsigned long	s_t;
 	t_phi			*head;
 	unsigned long	eat_gap;
-	int				future;
 
 	head= phi_i->head;
 	s_t = phi_i->simu->start_time;
 	eat_gap = get_timestamp(s_t) - phi_i->last_meal;
 	while (head)
 	{
-		if (!head->actual_eat_time && head->phi_id == 0)
-			future = 0;
-		else
-			future = 10; //phi_i->simu->die_time;
-		if (eat_gap + 0 >= phi_i->simu->die_time)
+		if (eat_gap >= phi_i->simu->die_time)
 		{
+			printf_message(head, "is died");
 			phi_i->simu->has_death = 1;
 			return (++head->phi_id);
 		}

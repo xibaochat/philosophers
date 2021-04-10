@@ -1,69 +1,70 @@
 #include "philo_one.h"
 
-void	init_simulation_info(t_simu *sti, char **av)
+int	monitoring_threads(t_phi *phi)
 {
-	sti->die_time = (unsigned long)(ft_atoi(av[2]));
-	sti->time_spend_eat = ft_atoi(av[3]);
-	sti->time_spend_sleep = ft_atoi(av[4]);
-	if (av[5])
-		sti->nb_times_eat = ft_atoi(av[5]);
-	else
-		sti->nb_times_eat = -1;
-	sti->has_death = 0;
+	pthread_t	monitor;
+	if (pthread_create(&monitor, NULL, &monitoring, phi))
+		return (1);
+	if (pthread_join(monitor, NULL))
+		return (1);
+	return (0);
 }
 
-t_simu	*init_simu_thread(char **av)
+int	create_philosophers_threads(t_phi   *phi)
 {
-	unsigned long	start_time;
-	t_simu			*phi_simu;
+	int	i;
 
-	phi_simu = (t_simu *)malloc(sizeof(t_simu));
-	phi_simu->start_time = get_actual_time();
-	init_simulation_info(phi_simu, av);
-	return (phi_simu);
-}
-
-void	ft_create_thread(t_phi *phi)
-{
-	while (phi)
+	phi->simu->start_time = get_actual_time();
+	i = -1;
+	while (phi && ++i < phi->simu->nb_p)
 	{
-		pthread_create(&phi->thread, NULL, &job, phi);
+		if (pthread_create(&(phi->thread), NULL, &job, phi))
+			return (1);
+		usleep(70);
 		phi = phi->next;
 	}
+	return (0);
+}
+
+int	terminate_philosopher_threads(t_phi *phi)
+{
+	int	i;
+
+	i = -1;
+	while (phi && ++i < phi->simu->nb_p)
+	{
+//		printf("xibao\n");
+		if (pthread_detach(phi->thread))
+			return (1);
+		phi = phi->next;
+	}
+	return (0);
 }
 
 int	main(int ac, char **av)
 {
-	int		i;
-	int		nb;
-	t_phi	*tmp;
-	t_phi	*head;
-	t_simu	*phi_simu;
-	int		v;
-	pthread_mutex_t *fork;
+	int		err_input;
+	t_phi	*phi;
+	t_simu	*simu;
 
-	v = valid_input(ac, av);
-	if (v)
+	err_input = valid_input(ac, av);
+	if (err_input)
 		return (0);
-	nb = ft_atoi(av[1]);
-	phi_simu = init_simu_thread(av);
-	fork = init_mutex_fork(nb);
-	head = create_node_list(fork, nb, av, phi_simu);
-	ft_create_thread(head);
-	tmp = head;
-	while (tmp)
+	simu = init_simu(av);
+	phi = init_phi_node(av, simu);
+//	printf("maobe000\n");
+	if (create_philosophers_threads(phi))
+		return (err_create_thread(phi, P_THREAD_ERR));
+//	printf("maobe111\n");
+	if (monitoring_threads(phi))
+		return (err_create_thread(phi, MONITOR_THREAD_ERR));
+//	printf("maobe222\n");
+	if (terminate_philosopher_threads(phi))
 	{
-		pthread_join(tmp->thread, NULL);
-		tmp = tmp->next;
+		return (err_terminate_thread(phi));
 	}
-	i = 0;
-	while (i < nb)
-	{
-		pthread_mutex_destroy(&fork[i]);
-		i++;
-	}
-	/* write(0, "ici2\n", 5); */
-	/* ft_free_var(head, fork_info); */
-	/* free(phi_simu); */
+//	printf("maobe333\n");
+	destroy_mutex(phi);
+	ft_free_var(phi);
 	return (0);
 }
