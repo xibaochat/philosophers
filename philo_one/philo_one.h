@@ -42,6 +42,8 @@ typedef struct s_simu
 	pthread_mutex_t	*fork;
 	pthread_mutex_t	display;
 	pthread_mutex_t	dead_lock;
+	pthread_mutex_t	eat_lock;
+	int				finish_meal;
 }				t_simu;
 
 typedef struct s_phi

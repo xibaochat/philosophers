@@ -12,6 +12,7 @@ void	destroy_mutex(t_phi *head)
 	}
 	pthread_mutex_destroy(&head->simu->display);
 	pthread_mutex_destroy(&head->simu->dead_lock);
+	pthread_mutex_destroy(&head->simu->eat_lock);
 }
 
 void	ft_free_var(t_phi *head)

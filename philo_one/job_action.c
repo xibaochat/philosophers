@@ -16,10 +16,10 @@ void	take_forks(int i, t_phi *p, pthread_mutex_t *fst, pthread_mutex_t *scd)
 void	p_eat(t_phi *p, pthread_mutex_t *fst, pthread_mutex_t *scd)
 {
 	pthread_mutex_lock(&p->simu->display);
-	printf_message(p, "eating");
+	printf_message(p, "is eating");
 	p->last_meal = get_actual_time();
 	pthread_mutex_unlock(&p->simu->display);
-//	usleep(p->simu->time_spend_eat * 1000);
+	//usleep(p->simu->time_spend_eat * 1000);
 	wait_for(p->simu->time_spend_eat);
 	p->actual_eat_time++;
 	pthread_mutex_unlock(fst);
@@ -29,16 +29,16 @@ void	p_eat(t_phi *p, pthread_mutex_t *fst, pthread_mutex_t *scd)
 void	p_sleep(t_phi *p)
 {
 	pthread_mutex_lock(&p->simu->display);
-	printf_message(p, "sleeping");
+	printf_message(p, "is sleeping");
 	pthread_mutex_unlock(&p->simu->display);
-//	usleep(p->simu->time_spend_sleep * 1000);
+	//usleep(p->simu->time_spend_sleep * 1000);
 	wait_for(p->simu->time_spend_sleep);
 }
 
 void	p_thinking(t_phi *p)
 {
 	pthread_mutex_lock(&p->simu->display);
-	printf_message(p, "thinking");
+	printf_message(p, "is thinking");
 	pthread_mutex_unlock(&p->simu->display);
 }
 
@@ -48,5 +48,5 @@ void	wait_for(long unsigned time)
 
     start = get_actual_time();
     while (get_actual_time() - start < time)
-        usleep(100);
+        usleep(10);
 }

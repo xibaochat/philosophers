@@ -2,17 +2,14 @@
 
 int	continue_job(int i, t_phi *phi)
 {
-	pthread_mutex_lock(&phi->simu->dead_lock);
+	usleep(10);
 	if (!phi->simu->has_death &&
-		 (!phi->simu->has_option ||
-		  i < phi->simu->nb_times_eat))
-		{
-			pthread_mutex_unlock(&phi->simu->dead_lock);
-			return (1);
-		}
-		else
-		    pthread_mutex_unlock(&phi->simu->dead_lock);
-		return (0);
+		(!phi->simu->has_option ||
+		 i < phi->simu->nb_times_eat))
+	{
+		return (1);
+	}
+	return(0);
 }
 
 void		*job(void *arg)
@@ -36,5 +33,13 @@ void		*job(void *arg)
 		if (continue_job(i, phi))
 			p_thinking(phi);
 		i++;
+	}
+	if (phi->simu->has_option &&
+		i == phi->simu->nb_times_eat)
+	{
+		pthread_mutex_lock(&phi->simu->eat_lock);
+		phi->simu->finish_meal++;
+		pthread_mutex_unlock(&phi->simu->eat_lock);
+		return (NULL);
 	}
 }

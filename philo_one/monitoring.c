@@ -5,9 +5,8 @@ void	*monitoring(void *arg)
 	t_phi *phi;
 
 	phi = (t_phi *)arg;
-	while (phi)
+	while (phi && ((phi->simu->has_option == -1) || (phi->simu->has_option != -1 && phi->simu->finish_meal < phi->simu->nb_p)))
 	{
-		usleep(10);
 		if (get_actual_time() - phi->last_meal > phi->simu->die_time)
 		{
 			pthread_mutex_unlock(&phi->simu->dead_lock);
@@ -23,4 +22,5 @@ void	*monitoring(void *arg)
 		else
 			phi = phi->next;
 		}
+	usleep(10);
 }
