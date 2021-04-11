@@ -7,9 +7,14 @@ void	*monitoring(void *arg)
 	phi = (t_phi *)arg;
 	while (phi && ((phi->simu->has_option == -1) || (phi->simu->has_option != -1 && phi->simu->finish_meal < phi->simu->nb_p)))
 	{
+		if (phi->simu->has_option != -1)
+		{
+			if (phi->simu->finish_meal >= phi->simu->nb_p)
+				break;
+		}
 		if (get_actual_time() - phi->last_meal > phi->simu->die_time)
 		{
-			pthread_mutex_unlock(&phi->simu->dead_lock);
+			pthread_mutex_lock(&phi->simu->dead_lock);
 			phi->simu->has_death = 1;
 			pthread_mutex_unlock(&phi->simu->dead_lock);
 			pthread_mutex_lock(&phi->simu->display);
