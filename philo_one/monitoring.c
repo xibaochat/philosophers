@@ -19,5 +19,5 @@ void	*monitoring(void *arg)
 			phi = phi->head;
 		else
 			phi = phi->next;
-		}
+	}
 }
