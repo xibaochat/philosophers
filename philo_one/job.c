@@ -2,9 +2,17 @@
 
 int	continue_job(int i, t_phi *phi)
 {
-	return (!phi->simu->has_death &&
-			 (!phi->simu->has_option ||
-			  i < phi->simu->nb_times_eat));
+	pthread_mutex_lock(&phi->simu->dead_lock);
+	if (!phi->simu->has_death &&
+		 (!phi->simu->has_option ||
+		  i < phi->simu->nb_times_eat))
+		{
+			pthread_mutex_unlock(&phi->simu->dead_lock);
+			return (1);
+		}
+		else
+		    pthread_mutex_unlock(&phi->simu->dead_lock);
+		return (0);
 }
 
 void		*job(void *arg)

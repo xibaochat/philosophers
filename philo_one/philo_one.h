@@ -41,6 +41,7 @@ typedef struct s_simu
 	int				has_option;
 	pthread_mutex_t	*fork;
 	pthread_mutex_t	display;
+	pthread_mutex_t	dead_lock;
 }				t_simu;
 
 typedef struct s_phi

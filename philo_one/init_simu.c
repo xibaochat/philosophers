@@ -6,6 +6,7 @@ void	init_simulation_info(t_simu *simu, char **av)
 	simu->time_spend_eat = ft_atoi(av[3]);
 	simu->time_spend_sleep = ft_atoi(av[4]);
 	pthread_mutex_init(&(simu->display), NULL);
+	pthread_mutex_init(&(simu->dead_lock), NULL);
 	if (av[5])
 	{
 		simu->has_option = 1;

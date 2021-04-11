@@ -20,7 +20,7 @@ int	create_philosophers_threads(t_phi   *phi)
 	{
 		if (pthread_create(&(phi->thread), NULL, &job, phi))
 			return (1);
-		usleep(70);
+//		usleep(70);
 		phi = phi->next;
 	}
 	return (0);
