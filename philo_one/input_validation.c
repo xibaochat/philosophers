@@ -10,6 +10,20 @@ void	show_err_message(char *str)
 	write(2, ARG4, ft_strlen(ARG4));
 }
 
+int	option_is_less_zero(char *s)
+{
+	if (s)
+	{
+		if (ft_atoi(s) <= 0)
+		{
+			printf(MES_MUST_EAT);
+			printf("should more than 0\n");
+			return (1);
+		}
+	}
+	return (0);
+}
+
 int	has_invalid_char(char **av)
 {
 	int	i;
@@ -44,6 +58,8 @@ int	valid_input(int	ac, char **av)
 	}
 	v = has_invalid_char(av);
 	if (v)
+		return (1);
+	if (option_is_less_zero(av[ac - 1]))
 		return (1);
 	return (0);
 }

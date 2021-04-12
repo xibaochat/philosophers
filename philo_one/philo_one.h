@@ -28,6 +28,7 @@
 # define TAKE_FORK "has taken a fork"
 # define P_THREAD_ERR "pthread create for philosopher is failed\n"
 # define MONITOR_THREAD_ERR "pthread create for monitoring is failed\n"
+# define MES_MUST_EAT "Number_of_times_each_philosopher_must_eat "
 
 typedef struct s_simu
 {
