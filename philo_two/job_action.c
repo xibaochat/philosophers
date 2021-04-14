@@ -10,11 +10,14 @@ void	take_forks(int i, t_phi *p)
 
 void	p_eat(t_phi *p)
 {
-	sem_wait(p->eating);
-	printf_message(p, "is eating");
-	p->last_meal = get_actual_time();
-	wait_for(p->simu->time_spend_eat);
-	sem_post(p->eating);
+	if (!p->simu->has_death)
+	{
+		sem_wait(p->eating);
+		printf_message(p, "is eating");
+		p->last_meal = get_actual_time();
+		wait_for(p->simu->time_spend_eat);
+		sem_post(p->eating);
+	}
 	sem_post(p->simu->fork);
 	sem_post(p->simu->fork);
 	p->actual_eat_time++;

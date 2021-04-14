@@ -15,8 +15,8 @@ int	create_philosophers_threads(t_phi   *phi)
 	int		i;
 	t_phi	*tmp;
 
-	tmp = phi;
 	phi->simu->start_time = get_actual_time();
+	tmp = phi;
 	i = -1;
 	while (phi && ++i < phi->simu->nb_p)
 	{

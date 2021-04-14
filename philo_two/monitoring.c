@@ -9,24 +9,15 @@ void	*monitoring(void *arg)
 	i = 0;
 	while (phi)
 	{
-		if (phi->simu->has_option)
-		{
-			if (phi->actual_eat_time >= phi->simu->nb_times_eat)
-				i++;
-			if (i >= phi->simu->nb_p)
-			{
-				phi->simu->has_death = 1;
-				break;
-			}
-		}
+		if (phi->simu->is_died)
+			break;
 		sem_wait(phi->eating);
 		if (get_actual_time() - phi->last_meal > phi->simu->die_time)
 		{
 			if (!phi->simu->has_death)
 			{
 				phi->simu->has_death = 1;
-				if (phi->simu->is_died == 0)
-					printf_message(phi, "died");
+				printf_message(phi, "died");
 				sem_post(phi->eating);
 				break;
 			}
