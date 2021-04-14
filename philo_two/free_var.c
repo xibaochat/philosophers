@@ -4,7 +4,6 @@ void	close_sem(t_phi *head)
 {
 	sem_close(head->simu->fork);
 	sem_close(head->simu->display);
-	sem_close(head->simu->death);
 }
 
 void	ft_free_var(t_phi *head)
@@ -20,6 +19,9 @@ void	ft_free_var(t_phi *head)
 	while (head)
 	{
 		tmp = head->next;
+		sem_close(head->eating);
+		free(head->name);
+		head->name = NULL;
 		head->next = NULL;
 		free(head);
 		head = tmp;

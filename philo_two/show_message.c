@@ -19,5 +19,7 @@ void	printf_message(t_phi *p, char *s)
 	unsigned long	t;
 
 	t = p->simu->start_time;
+	sem_wait(p->simu->display);
 	printf("%ld %d %s\n", get_timestamp(t), p->phi_id + 1, s);
+	sem_post(p->simu->display);
 }

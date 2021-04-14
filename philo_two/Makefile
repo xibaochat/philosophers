@@ -1,9 +1,9 @@
 NAME = philo_two
 
-SRC =	init_fork.c init_simu.c main.c init_phi.c \
+SRC =	init_simu.c main.c init_phi.c \
 		input_validation.c util.c time.c show_message.c \
 		job.c job_action.c monitoring.c \
-		free_var.c
+		free_var.c ft_strjoin.c ft_itoa.c
 
 
 #CFLAGS = -Wall -Wextra -Werror

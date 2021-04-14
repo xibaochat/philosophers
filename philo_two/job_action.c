@@ -2,42 +2,33 @@
 
 void	take_forks(int i, t_phi *p)
 {
-		sem_wait(p->simu->fork);
-		sem_wait(p->simu->fork);
-		sem_wait(p->simu->display);
-		if (continue_job(i, p))
-		{
-			printf_message(p, TAKE_FORK);
-			printf_message(p, TAKE_FORK);
-		}
-		sem_post(p->simu->display);
+	sem_wait(p->simu->fork);
+	printf_message(p, TAKE_FORK);
+	sem_wait(p->simu->fork);
+	printf_message(p, TAKE_FORK);
 }
 
 void	p_eat(t_phi *p)
 {
-	sem_wait(p->simu->display);
+	sem_wait(p->eating);
 	printf_message(p, "is eating");
 	p->last_meal = get_actual_time();
-	sem_post(p->simu->display);
 	wait_for(p->simu->time_spend_eat);
+	sem_post(p->eating);
+	sem_post(p->simu->fork);
+	sem_post(p->simu->fork);
 	p->actual_eat_time++;
-	sem_post(p->simu->fork);
-	sem_post(p->simu->fork);
 }
 
 void	p_sleep(t_phi *p)
 {
-	sem_wait(p->simu->display);
 	printf_message(p, "is sleeping");
-	sem_post(p->simu->display);
 	wait_for(p->simu->time_spend_sleep);
 }
 
 void	p_thinking(t_phi *p)
 {
-	sem_wait(p->simu->display);
 	printf_message(p, "is thinking");
-	sem_post(p->simu->display);
 }
 
 void	wait_for(long unsigned time)

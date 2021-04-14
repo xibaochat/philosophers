@@ -48,9 +48,13 @@ int	main(int ac, char **av)
 
 	err_input = valid_input(ac, av);
 	if (err_input)
-		return (0);
+		return (1);
 	simu = init_simu(av);
+	if (!simu)
+		return (1);
 	phi = init_phi_node(av, simu);
+	if (!phi)
+		return (1);
 //	printf("maobe000\n");
 	if (create_philosophers_threads(phi))
 		return (err_create_thread(phi, P_THREAD_ERR));

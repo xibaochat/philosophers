@@ -44,7 +44,6 @@ typedef struct s_simu
 	int				has_option;
 	sem_t			*fork;
 	sem_t			*display;
-	sem_t			*death;
 	int				finish_meal;
 }				t_simu;
 
@@ -56,11 +55,12 @@ typedef struct s_phi
 	unsigned long	last_meal;
 	int				actual_eat_time;
 	t_simu			*simu;
+	sem_t			*eating;
+	char			*name;
 	pthread_t		thread;
 
 }				t_phi;
 
-void			init_fork(t_simu *simu);
 int				ft_atoi(const char *s);
 void			ft_free_var(t_phi *head);
 size_t			ft_strlen(const char *str);
@@ -104,6 +104,8 @@ int				continue_job(int i, t_phi *phi);
 void			ft_free_var(t_phi *head);
 void			wait_for(long unsigned time);
 void			close_sem(t_phi *head);
+char			*ft_strjoin(char const *s1, char const *s2);
+char			*ft_itoa(int n);
 
 
 #endif

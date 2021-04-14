@@ -1,5 +1,24 @@
 #include "philo_two.h"
 
+int	init_fork_display(t_simu *simu)
+{
+	sem_unlink("fork");
+	sem_unlink("display");
+	simu->fork = sem_open ("fork", O_CREAT | O_EXCL, S_IRWXU, simu->nb_p);
+	simu->display = sem_open ("display", O_CREAT | O_EXCL, S_IRWXU, 1);
+	if (simu->fork == SEM_FAILED)
+	{
+		sem_unlink("fork");
+		return (1);
+	}
+	if (simu->display == SEM_FAILED)
+	{
+		sem_unlink("display");
+		return (1);
+	}
+	return (0);
+}
+
 void	init_simulation_info(t_simu *simu, char **av)
 {
 	simu->die_time = (unsigned long)(ft_atoi(av[2]));
@@ -26,8 +45,14 @@ t_simu	*init_simu(char **av)
 	t_simu			*simu;
 
 	simu = (t_simu *)malloc(sizeof(t_simu));
+	if (!simu)
+		return (NULL);
 	simu->nb_p = ft_atoi(av[1]);
 	init_simulation_info(simu, av);
-	init_fork(simu);
+	if (init_fork_display(simu))
+	{
+		printf("Failed in sem initialization\n");
+		return (NULL);
+	}
 	return (simu);
 }

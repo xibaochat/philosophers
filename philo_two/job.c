@@ -4,7 +4,7 @@ int	continue_job(int i, t_phi *phi)
 {
 	usleep(10);
 	if (!phi->simu->has_death &&
-		(!phi->simu->has_option ||
+		(!phi->simu->has_option||
 		 i < phi->simu->nb_times_eat))
 	{
 		return (1);
@@ -24,14 +24,30 @@ void		*job(void *arg)
 		take_forks(i, phi);
 		if (continue_job(i, phi))
 			p_eat(phi);
+		else
+		{
+			phi->simu->has_death = 1;
+			break;
+		}
 		if (continue_job(i, phi))
 			p_sleep(phi);
+		else
+		{
+			phi->simu->has_death = 1;
+			break;
+		}
 		if (continue_job(i, phi))
 			p_thinking(phi);
+		else
+		{
+			phi->simu->has_death = 1;
+			break;
+		}
 		i++;
 	}
-	if (phi->simu->has_option &&
+	if (phi->simu->has_option != -1 &&
 		i == phi->simu->nb_times_eat)
 		phi->simu->finish_meal++;
-		return (NULL);
+	//printf("in job nb : %d\n",  phi->simu->finish_meal);
+	return (NULL);
 }
