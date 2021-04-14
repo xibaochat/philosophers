@@ -24,6 +24,12 @@ void		*job(void *arg)
 		take_forks(i, phi);
 		if (!phi->simu->has_death)
 			p_eat(phi);
+		if (!phi->simu->has_death && phi->actual_eat_time > phi->simu->nb_times_eat)
+		{
+			phi->simu->is_died = 1;
+			phi->simu->has_death = 1;
+			break;
+		}
 		if (!phi->simu->has_death)
 			p_sleep(phi);
 		if (!phi->simu->has_death)

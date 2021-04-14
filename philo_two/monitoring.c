@@ -25,7 +25,8 @@ void	*monitoring(void *arg)
 			if (!phi->simu->has_death)
 			{
 				phi->simu->has_death = 1;
-				printf_message(phi, "died");
+				if (phi->simu->is_died == 0)
+					printf_message(phi, "died");
 				sem_post(phi->eating);
 				break;
 			}

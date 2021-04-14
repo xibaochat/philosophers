@@ -12,14 +12,28 @@ int	monitoring_threads(t_phi *phi)
 
 int	create_philosophers_threads(t_phi   *phi)
 {
-	int	i;
+	int		i;
+	t_phi	*tmp;
 
+	tmp = phi;
 	phi->simu->start_time = get_actual_time();
 	i = -1;
 	while (phi && ++i < phi->simu->nb_p)
 	{
-		if (pthread_create(&(phi->thread), NULL, &job, phi))
-			return (1);
+		if (!(i % 2))
+			if (pthread_create(&(phi->thread), NULL, &job, phi))
+				return (1);
+		usleep(70);
+		phi = phi->next;
+	}
+	i = -1;
+	phi = tmp;
+	while (phi && ++i < phi->simu->nb_p)
+	{
+		if (i % 2)
+			if (pthread_create(&(phi->thread), NULL, &job, phi))
+				return (1);
+		usleep(70);
 		phi = phi->next;
 	}
 	return (0);

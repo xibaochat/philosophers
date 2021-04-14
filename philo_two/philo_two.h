@@ -41,6 +41,7 @@ typedef struct s_simu
 	int				nb_times_eat;
 	unsigned long	start_time;
 	int				has_death;
+	int				is_died;
 	int				has_option;
 	sem_t			*fork;
 	sem_t			*display;

@@ -25,6 +25,7 @@ void	init_simulation_info(t_simu *simu, char **av)
 	simu->time_spend_eat = ft_atoi(av[3]);
 	simu->time_spend_sleep = ft_atoi(av[4]);
 	simu->finish_meal = 0;
+	simu->is_died = 0;
 	if (av[5])
 	{
 		simu->has_option = 1;
