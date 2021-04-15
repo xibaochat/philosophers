@@ -7,7 +7,7 @@ int	init_phi_sem(int i, t_phi *phi)
 	phi_n = ft_itoa(i);
 	if (phi_n)
 	{
-		phi->name = ft_strjoin("eat_phi_", ft_itoa(i));
+		phi->name = ft_strjoin("eat_phi_", phi_n);
 		free(phi_n);
 		sem_unlink(phi->name);
 		phi->eating = sem_open(phi->name, O_CREAT | O_EXCL, S_IRWXU, 1);
@@ -18,6 +18,7 @@ int	init_phi_sem(int i, t_phi *phi)
 		}
 		return (0);
 	}
+	return (1);
 }
 
 void	init_phi_node_data(int i, int nb, t_phi *node, t_simu *simu)
