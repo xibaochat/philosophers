@@ -4,8 +4,8 @@ int	init_fork_display(t_simu *simu)
 {
 	sem_unlink("fork");
 	sem_unlink("display");
-	simu->fork = sem_open ("fork", O_CREAT | O_EXCL, S_IRWXU, simu->nb_p);
-	simu->display = sem_open ("display", O_CREAT | O_EXCL, S_IRWXU, 1);
+	simu->fork = sem_open("fork", O_CREAT, S_IRWXU, simu->nb_p);
+	simu->display = sem_open("display", O_CREAT, S_IRWXU, 1);
 	if (simu->fork == SEM_FAILED)
 	{
 		sem_unlink("fork");

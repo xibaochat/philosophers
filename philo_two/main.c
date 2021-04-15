@@ -1,12 +1,17 @@
 #include "philo_two.h"
+#include <errno.h>
 
 int	monitoring_threads(t_phi *phi)
 {
 	pthread_t	monitor;
+	t_phi		*tmp;
+
+	tmp = phi;
 	if (pthread_create(&monitor, NULL, &monitoring, phi))
 		return (1);
 	if (pthread_join(monitor, NULL))
 		return (1);
+	phi = phi->next;
 	return (0);
 }
 
@@ -47,8 +52,12 @@ int	terminate_philosopher_threads(t_phi *phi)
 	while (phi && ++i < phi->simu->nb_p)
 	{
 //		printf("xibao\n");
-		if (pthread_detach(phi->thread))
+		int err;
+		if ((err = pthread_join(phi->thread, NULL)))
+		{
+			printf("err:%d , %d %d %d %d\n", err,EDEADLK, EINVAL, EINVAL, ESRCH);
 			return (1);
+		}
 		phi = phi->next;
 	}
 	return (0);
@@ -67,9 +76,9 @@ int	main(int ac, char **av)
 	if (!simu)
 		return (1);
 	phi = init_phi_node(av, simu);
+//	printf("maobe000\n");
 	if (!phi)
 		return (1);
-//	printf("maobe000\n");
 	if (create_philosophers_threads(phi))
 		return (err_create_thread(phi, P_THREAD_ERR));
 //	printf("maobe111\n");

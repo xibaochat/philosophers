@@ -95,11 +95,8 @@ void			printf_message(t_phi *p, char *s);
 int				err_create_thread(t_phi *p, char *s);
 void			*job(void *arg);
 int				err_terminate_thread(t_phi *p);
-void			take_forks(int i, t_phi *p);
-void			p_eat(t_phi *p);
 void			p_sleep(t_phi *p);
 void			p_thinking(t_phi *p);
-int				monitoring_threads(t_phi *phi);
 void			*monitoring(void *arg);
 int				continue_job(int i, t_phi *phi);
 void			ft_free_var(t_phi *head);
@@ -107,6 +104,7 @@ void			wait_for(long unsigned time);
 void			close_sem(t_phi *head);
 char			*ft_strjoin(char const *s1, char const *s2);
 char			*ft_itoa(int n);
+void			eat(t_phi *p);
 
 
 #endif
