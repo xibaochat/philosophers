@@ -1,4 +1,4 @@
-#include "philo_one.h"
+# include "philo_one.h"
 
 void	p_eat(t_phi *p, pthread_mutex_t *fst, pthread_mutex_t *scd)
 {

@@ -4,11 +4,11 @@ int	monitoring_threads(t_phi *phi)
 {
 	pthread_t	monitor;
 
+	usleep(1000);
 	if (pthread_create(&monitor, NULL, &monitoring, phi))
 		return (1);
 	if (pthread_join(monitor, NULL))
 		return (1);
-	phi = phi->next;
 	return (0);
 }
 

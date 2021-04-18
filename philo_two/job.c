@@ -7,7 +7,7 @@ void		*job(void *arg)
 
 	i = 0;
 	phi = (t_phi *)arg;
-	while (!phi->simu->has_death)
+	while (1 && !phi->simu->has_death)
 	{
 		eat(phi);
 //		write(1, "BOID2\n", 6);
