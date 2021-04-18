@@ -28,5 +28,5 @@ void	init_phi_fork(int nb, pthread_mutex_t *f, t_phi *node)
 	next_id = get_next_fork_nb(nb, node->phi_id);
 	node->right_fork = &(f[next_id]);
 	node->left_fork = &(f[node->phi_id]);
-	printf("ici ID:%d R:%p %p\n", next_id, node->right_fork,  node->left_fork);
+//	printf("ici ID:%d R:%p %p\n", next_id, node->right_fork,  node->left_fork);
 }
