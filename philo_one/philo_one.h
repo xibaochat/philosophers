@@ -42,9 +42,7 @@ typedef struct s_simu
 	int				has_option;
 	pthread_mutex_t	*fork;
 	pthread_mutex_t	display;
-	pthread_mutex_t	dead_lock;
-	pthread_mutex_t	eat_lock;
-	int				finish_meal;
+	int				is_died;
 }				t_simu;
 
 typedef struct s_phi
@@ -59,6 +57,7 @@ typedef struct s_phi
 	unsigned long	last_meal;
 	int				actual_eat_time;
 	t_simu			*simu;
+	pthread_mutex_t	eat_lock;
 }				t_phi;
 
 pthread_mutex_t	*init_fork(int nb);
@@ -101,7 +100,6 @@ void			*job(void *arg);
 int				err_terminate_thread(t_phi *p);
 pthread_mutex_t	*get_fst_fork(t_phi *phi_i);
 pthread_mutex_t	*get_scd_fork(t_phi *phi_i);
-void			take_forks(int i, t_phi *p, pthread_mutex_t *fst, pthread_mutex_t *scd);
 void			p_eat(t_phi *p, pthread_mutex_t *fst, pthread_mutex_t *scd);
 void			p_sleep(t_phi *p);
 void			p_thinking(t_phi *p);

@@ -5,21 +5,18 @@ void	*monitoring(void *arg)
 	t_phi *phi;
 
 	phi = (t_phi *)arg;
-	while (phi && ((phi->simu->has_option == -1) || (phi->simu->has_option != -1 && phi->simu->finish_meal < phi->simu->nb_p)))
+	while (phi && !phi->simu->has_death)
 	{
-		if (phi->simu->has_option != -1)
-		{
-			if (phi->simu->finish_meal >= phi->simu->nb_p)
-				break;
-		}
+		if (phi->simu->is_died)
+			break;
 		if (get_actual_time() - phi->last_meal > phi->simu->die_time)
 		{
-			pthread_mutex_lock(&phi->simu->dead_lock);
+			printf("ici nb %d %ld %ld\n", phi->phi_id + 1, get_actual_time(), phi->last_meal);
+			pthread_mutex_lock(&phi->eat_lock);
 			phi->simu->has_death = 1;
-			pthread_mutex_unlock(&phi->simu->dead_lock);
-			pthread_mutex_lock(&phi->simu->display);
+			phi->simu->is_died = 1;
 			printf_message(phi, "died");
-			pthread_mutex_unlock(&phi->simu->display);
+			pthread_mutex_unlock(&phi->eat_lock);
 			break;
 		}
 		if (!phi->next)

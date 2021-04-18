@@ -11,8 +11,6 @@ void	destroy_mutex(t_phi *head)
 		i++;
 	}
 	pthread_mutex_destroy(&head->simu->display);
-	pthread_mutex_destroy(&head->simu->dead_lock);
-	pthread_mutex_destroy(&head->simu->eat_lock);
 }
 
 void	ft_free_var(t_phi *head)
@@ -32,6 +30,7 @@ void	ft_free_var(t_phi *head)
 	while (head)
 	{
 		tmp = head->next;
+		pthread_mutex_destroy(&head->eat_lock);
 		head->next = NULL;
 		free(head);
 		head = tmp;

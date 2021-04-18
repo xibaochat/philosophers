@@ -5,6 +5,7 @@ void	init_phi_node_data(int i, int nb, t_phi *node, t_simu *simu)
 		node->simu = simu; //init_simu_thread(av);
 		node->phi_id = i;
 		node->actual_eat_time = 0;
+		pthread_mutex_init(&(node->eat_lock), NULL);
 		node->last_meal = get_actual_time();
 		init_phi_fork(nb, simu->fork, node);
 		node->next = NULL;
