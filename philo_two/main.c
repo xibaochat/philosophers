@@ -4,7 +4,6 @@ int	monitoring_threads(t_phi *phi)
 {
 	pthread_t	monitor;
 
-	tmp = phi;
 	if (pthread_create(&monitor, NULL, &monitoring, phi))
 		return (1);
 	if (pthread_join(monitor, NULL))
