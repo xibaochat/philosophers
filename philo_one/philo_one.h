@@ -103,7 +103,6 @@ pthread_mutex_t	*get_scd_fork(t_phi *phi_i);
 void			p_eat(t_phi *p, pthread_mutex_t *fst, pthread_mutex_t *scd);
 void			p_sleep(t_phi *p);
 void			p_thinking(t_phi *p);
-int				monitoring_threads(t_phi *phi);
 void			*monitoring(void *arg);
 int				continue_job(int i, t_phi *phi);
 void			destroy_mutex(t_phi *head);
