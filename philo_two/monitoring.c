@@ -23,7 +23,7 @@ void	*monitoring(void *arg)
 			phi = phi->head;
 		else
 			phi = phi->next;
-//		usleep(10);
+		usleep(1000);
 	}
 	return (NULL);
 }

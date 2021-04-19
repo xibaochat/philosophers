@@ -2,10 +2,8 @@
 
 void		*job(void *arg)
 {
-	int				i;
 	t_phi			*phi;
 
-	i = 0;
 	phi = (t_phi *)arg;
 	while (1 && !phi->simu->has_death)
 	{
