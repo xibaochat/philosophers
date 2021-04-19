@@ -10,6 +10,11 @@ void	eat(t_phi *p)
 	}
 	printf_message(p, TAKE_FORK);
 	sem_wait(p->simu->fork);
+	if (p->simu->has_death)
+	{
+		sem_post(p->simu->fork);
+		return ;
+	 }
 	printf_message(p, TAKE_FORK);
 	if (!p->simu->has_death)
 	{

@@ -13,8 +13,8 @@ void	*monitoring(void *arg)
 		{
 			sem_wait(phi->eating);
 			phi->simu->has_death = 1;
-			printf_message(phi, "died");
 			phi->simu->is_died = 1;
+			printf_message(phi, "died");
 			sem_post(phi->eating);
 			break;
 		}
@@ -23,7 +23,7 @@ void	*monitoring(void *arg)
 			phi = phi->head;
 		else
 			phi = phi->next;
-		usleep(10);
+//		usleep(10);
 	}
 	return (NULL);
 }
