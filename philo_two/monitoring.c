@@ -18,12 +18,10 @@ void	*monitoring(void *arg)
 			sem_post(phi->eating);
 			break;
 		}
-		sem_post(phi->eating);
 		if (!phi->next)
 			phi = phi->head;
 		else
 			phi = phi->next;
-		usleep(1000);
 	}
 	return (NULL);
 }

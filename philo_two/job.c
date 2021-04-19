@@ -18,6 +18,7 @@ void		*job(void *arg)
 			p_sleep(phi);
 		if (!phi->simu->has_death)
 			p_thinking(phi);
+		usleep(10);
 	}
 	return (NULL);
 }
