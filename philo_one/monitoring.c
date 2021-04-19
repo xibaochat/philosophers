@@ -18,7 +18,7 @@ void	*monitoring(void *arg)
 			pthread_mutex_unlock(&phi->eat_lock);
 			break;
 		}
-		pthread_mutex_unlock(&phi->eat_lock);
+//		pthread_mutex_unlock(&phi->eat_lock);
 		if (!phi->next)
 			phi = phi->head;
 		else
