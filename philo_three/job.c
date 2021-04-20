@@ -20,8 +20,7 @@ void		*job(void *arg)
 		if (phi->simu->has_death)
             break;
 		p_thinking(phi);
-		//	usleep(10);
+		usleep(10);
 	}
 	exit(1);
-	//return (NULL);
 }

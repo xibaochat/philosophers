@@ -12,14 +12,11 @@ void	*monitoring(void *arg)
 		if (get_actual_time() - phi->last_meal > phi->simu->die_time)
 		{
 			phi->simu->has_death = 1;
-			printf("INSIDE??\n");
-			printf("\n%ld %ld\n\n", get_actual_time() - phi->last_meal, phi->simu->die_time);
 			sem_wait(phi->eating);
 			printf_message(phi, "died");
 			sem_post(phi->eating);
 			exit(0);
 		}
 	}
-	exit(0);
 	return (NULL);
 }

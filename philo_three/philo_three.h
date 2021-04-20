@@ -48,7 +48,7 @@ typedef struct s_simu
 	sem_t			*fork;
 	sem_t			*display;
 	int				finish_meal;
-	pid_t				*pid;
+	pid_t			*pid;
 
 }				t_simu;
 
@@ -63,7 +63,6 @@ typedef struct s_phi
 	sem_t			*eating;
 	char			*name;
 	pthread_t		monitor;
-
 }				t_phi;
 
 int				ft_atoi(const char *s);

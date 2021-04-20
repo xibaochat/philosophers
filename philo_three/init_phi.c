@@ -23,11 +23,11 @@ int	init_phi_sem(int i, t_phi *phi)
 
 void	init_phi_node_data(int i, int nb, t_phi *node, t_simu *simu)
 {
-		node->simu = simu;
-		node->phi_id = i;
-		node->actual_eat_time = 0;
-		node->last_meal = get_actual_time();
-		node->next = NULL;
+	node->simu = simu;
+	node->phi_id = i;
+	node->actual_eat_time = 0;
+	node->last_meal = get_actual_time();
+	node->next = NULL;
 }
 
 t_phi	*init_phi_node(char **av, t_simu *simu)
