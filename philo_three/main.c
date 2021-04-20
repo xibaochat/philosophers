@@ -24,8 +24,7 @@ void	pilo_process(t_phi *phi)
 	phi->simu->start_time = get_actual_time();
 	while (phi && ++i < phi->simu->nb_p)
 	{
-		printf("Here\n");
-		if (!i % 2)
+		if (!(i % 2))
 			init_process(phi, i);
 		usleep(70);
 		phi = phi->next;
@@ -34,8 +33,8 @@ void	pilo_process(t_phi *phi)
 	phi = tmp;
 	while (phi && ++i < phi->simu->nb_p)
 	{
-		printf("again\n");
-		if (!i % 2)
+
+		if (i % 2)
 			init_process(phi, i);
 		usleep(70);
 		phi = phi->next;
