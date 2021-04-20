@@ -42,7 +42,6 @@ void	init_simulation_info(t_simu *simu, char **av)
 t_simu	*init_simu(char **av)
 {
 	int				nb_p;
-	unsigned long	start_time;
 	t_simu			*simu;
 
 	simu = (t_simu *)malloc(sizeof(t_simu));
