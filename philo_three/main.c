@@ -41,22 +41,16 @@ void	track_child(t_phi *phi)
 	int				status_value;
 	unsigned long	i;
 
-	i = 0;
-	while (i < phi->simu->nb_p)
+	i = -1;
+	waitpid(-1, &status, 0);
+	if ((WIFEXITED(status) || WIFSIGNALED(status)))
 	{
-		waitpid(-1, &status, 0);
-		if ((WIFEXITED(status) || WIFSIGNALED(status)))
+		status_value = WEXITSTATUS(status);
+		if (status_value == 0)
 		{
-			status_value = WEXITSTATUS(status);
-			if (status_value == 0)
-			{
-				printf_message(phi, "died");
-				while (i < phi->simu->nb_p)
-					kill(phi->simu->pid[i++], SIGKILL);
-				break ;
-			}
-			else if (status_value == 1)
-				i++;
+			printf_message(phi, "died");
+			while (++i < phi->simu->nb_p)
+				kill(phi->simu->pid[i], SIGKILL);
 		}
 	}
 }
