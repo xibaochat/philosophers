@@ -1,4 +1,4 @@
-# include "philo_three.h"
+#include "philo_three.h"
 
 void	close_sem(t_phi *head)
 {
@@ -18,12 +18,14 @@ void	ft_free_var(t_phi *head)
 {
 	t_phi	*tmp;
 
-
 	close_sem(head);
+	if (head->simu->pid)
+	{
+		free(head->simu->pid);
+		head->simu->pid = NULL;
+	}
 	if (head->simu)
 	{
-		if (head->simu->pid)
-			free(head->simu->pid);
 		free(head->simu);
 		head->simu = NULL;
 	}

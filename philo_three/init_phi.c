@@ -7,13 +7,13 @@ int	init_phi_sem(int i, t_phi *phi)
 	phi_n = ft_itoa(i);
 	if (phi_n)
 	{
-		phi->name = ft_strjoin("eat_phi_", phi_n);
-		free(phi_n);
+		phi->name = phi_n;
 		sem_unlink(phi->name);
 		phi->eating = sem_open(phi->name, O_CREAT | O_EXCL, S_IRWXU, 1);
 		if (phi->eating == SEM_FAILED)
 		{
 			sem_unlink(phi->name);
+			free(phi_n);
 			return (1);
 		}
 		return (0);
@@ -21,13 +21,27 @@ int	init_phi_sem(int i, t_phi *phi)
 	return (1);
 }
 
-void	init_phi_node_data(int i, int nb, t_phi *node, t_simu *simu)
+void	init_phi_node_data(int i, t_phi *node, t_simu *simu)
 {
 	node->simu = simu;
 	node->phi_id = i;
 	node->actual_eat_time = 0;
 	node->last_meal = get_actual_time();
 	node->next = NULL;
+}
+
+void	conjoin_node(int i, t_phi **current_node, t_phi **head, t_phi **prev)
+{
+	if (i == 0)
+	{
+		*head = *current_node;
+		*prev = *head;
+	}
+	else
+	{
+		(*prev)->next = *current_node;
+		*prev = *current_node;
+	}
 }
 
 t_phi	*init_phi_node(char **av, t_simu *simu)
@@ -42,20 +56,11 @@ t_phi	*init_phi_node(char **av, t_simu *simu)
 	while (i < simu->nb_p)
 	{
 		current_node = (t_phi *)malloc(sizeof(t_phi));
-		memset(current_node, 0, sizeof(current_node));
-		init_phi_node_data(i, simu->nb_p, current_node, simu);
+		memset(current_node, 0, sizeof(t_phi));
+		init_phi_node_data(i, current_node, simu);
 		if (init_phi_sem(i, current_node))
 			return (NULL);
-		if (i == 0)
-		{
-			head = current_node;
-			prev = head;
-		}
-		else
-		{
-			prev->next = current_node;
-			prev = current_node;
-		}
+		conjoin_node(i, &current_node, &head, &prev);
 		current_node->head = head;
 		i++;
 	}

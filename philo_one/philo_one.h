@@ -108,6 +108,4 @@ void			destroy_mutex(t_phi *head);
 void			ft_free_var(t_phi *head);
 void			wait_for(long unsigned time);
 
-
-
 #endif

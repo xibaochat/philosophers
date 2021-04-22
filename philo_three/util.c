@@ -40,7 +40,7 @@ int	ft_atoi(const char *s)
 	return (sign * res);
 }
 
-size_t		ft_strlen(const char *str)
+size_t	ft_strlen(const char *str)
 {
 	size_t	i;
 	size_t	lens;

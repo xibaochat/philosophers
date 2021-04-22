@@ -33,7 +33,7 @@ void	init_simulation_info(t_simu *simu, char **av)
 	}
 	else
 	{
-		simu->has_option	= 0;
+		simu->has_option = 0;
 		simu->nb_times_eat = -1;
 	}
 	simu->has_death = 0;
@@ -47,6 +47,7 @@ t_simu	*init_simu(char **av)
 	simu = (t_simu *)malloc(sizeof(t_simu));
 	if (!simu)
 		return (NULL);
+	memset(simu, 0, sizeof(t_simu));
 	simu->nb_p = ft_atoi(av[1]);
 	init_simulation_info(simu, av);
 	if (init_fork_display(simu))
@@ -55,6 +56,6 @@ t_simu	*init_simu(char **av)
 		return (NULL);
 	}
 	simu->pid = (pid_t *)malloc(sizeof(pid_t) * simu->nb_p);
-	memset(simu->pid, 0, simu->nb_p);
+	memset(simu->pid, 0, sizeof(pid_t) * simu->nb_p);
 	return (simu);
 }

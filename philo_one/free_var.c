@@ -1,4 +1,4 @@
-# include "philo_one.h"
+#include "philo_one.h"
 
 void	destroy_mutex(t_phi *head)
 {

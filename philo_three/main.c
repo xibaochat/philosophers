@@ -19,7 +19,6 @@ void	pilo_process(t_phi *phi)
 	phi = tmp;
 	while (phi && ++i < phi->simu->nb_p)
 	{
-
 		if (i % 2)
 			init_process(phi, i);
 		usleep(70);
@@ -29,7 +28,6 @@ void	pilo_process(t_phi *phi)
 
 void	kill_philo(t_phi *phi)
 {
-
 	int	i;
 
 	i = -1;
@@ -37,40 +35,38 @@ void	kill_philo(t_phi *phi)
 		kill(phi->simu->pid[i], SIGKILL);
 }
 
-void track_child(t_phi *phi)
+void	track_child(t_phi *phi)
 {
-	int             status;
-    int             status_value;
-    unsigned long   i;
+	int				status;
+	int				status_value;
+	unsigned long	i;
 
-    i = 0;
-    while (i < phi->simu->nb_p)
-    {
-        waitpid(phi->simu->pid[i], &status, 0);
-        if ((WIFEXITED(status) || WIFSIGNALED(status)))
-        {
-            if ((status_value = WEXITSTATUS(status)) == 0)
-            {
-                while (i < phi->simu->nb_p)
-                {
-                    if (i != phi->simu->nb_p)
-                        kill(phi->simu->pid[i], SIGTERM);
-                    i++;
-                }
-                break ;
-            }
-            else if (status_value == 1)
-                i++;
-        }
-    }
+	i = 0;
+	while (i < phi->simu->nb_p)
+	{
+		waitpid(-1, &status, 0);
+		if ((WIFEXITED(status) || WIFSIGNALED(status)))
+		{
+			status_value = WEXITSTATUS(status);
+			if (status_value == 0)
+			{
+				printf_message(phi, "died");
+				while (i < phi->simu->nb_p)
+					kill(phi->simu->pid[i++], SIGKILL);
+				break ;
+			}
+			else if (status_value == 1)
+				i++;
+		}
+	}
 }
 
 int	main(int ac, char **av)
 {
-	int		err_input;
-	t_phi	*phi;
-	t_simu	*simu;
-	pthread_t monitor;
+	int			err_input;
+	t_phi		*phi;
+	t_simu		*simu;
+	pthread_t	monitor;
 
 	err_input = valid_input(ac, av);
 	if (err_input)

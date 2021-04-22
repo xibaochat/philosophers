@@ -4,7 +4,6 @@ int	monitoring_threads(t_phi *phi)
 {
 	pthread_t	monitor;
 
-	//	usleep(1000);
 	if (pthread_create(&monitor, NULL, &monitoring, phi))
 		return (1);
 	if (pthread_join(monitor, NULL))
@@ -12,30 +11,16 @@ int	monitoring_threads(t_phi *phi)
 	return (0);
 }
 
-int	create_philosophers_threads(t_phi   *phi)
+int	create_philosophers_threads(t_phi *phi)
 {
 	int		i;
-	t_phi	*tmp;
 
 	phi->simu->start_time = get_actual_time();
-	tmp = phi;
 	i = -1;
 	while (phi && ++i < phi->simu->nb_p)
 	{
-		if (!(i % 2))
-			if (pthread_create(&(phi->thread), NULL, &job, phi))
-				return (1);
-		usleep(70);
-		phi = phi->next;
-	}
-	i = -1;
-	phi = tmp;
-	while (phi && ++i < phi->simu->nb_p)
-	{
-		if (i % 2)
-			if (pthread_create(&(phi->thread), NULL, &job, phi))
-				return (1);
-		usleep(70);
+		if (pthread_create(&(phi->thread), NULL, &job, phi))
+			return (1);
 		phi = phi->next;
 	}
 	return (0);
@@ -75,9 +60,9 @@ int	main(int ac, char **av)
 	if (monitoring_threads(phi))
 		return (err_create_thread(phi, MONITOR_THREAD_ERR));
 	if (terminate_philosopher_threads(phi))
-	{
 		return (err_terminate_thread(phi));
-	}
+	if (!phi->simu->has_death && phi->simu->is_died)
+		printf("All meals eaten\n");
 	ft_free_var(phi);
 	return (0);
 }

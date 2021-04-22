@@ -23,11 +23,25 @@ int	init_phi_sem(int i, t_phi *phi)
 
 void	init_phi_node_data(int i, int nb, t_phi *node, t_simu *simu)
 {
-		node->simu = simu; //init_simu_thread(av);
-		node->phi_id = i;
-		node->actual_eat_time = 0;
-		node->last_meal = get_actual_time();
-		node->next = NULL;
+	node->simu = simu;
+	node->phi_id = i;
+	node->actual_eat_time = 0;
+	node->last_meal = get_actual_time();
+	node->next = NULL;
+}
+
+void	conjoin_node(int i, t_phi **current_node, t_phi **head, t_phi **prev)
+{
+	if (i == 0)
+	{
+		*head = *current_node;
+		*prev = *head;
+	}
+	else
+	{
+		(*prev)->next = *current_node;
+		*prev = *current_node;
+	}
 }
 
 t_phi	*init_phi_node(char **av, t_simu *simu)
@@ -46,16 +60,7 @@ t_phi	*init_phi_node(char **av, t_simu *simu)
 		init_phi_node_data(i, simu->nb_p, current_node, simu);
 		if (init_phi_sem(i, current_node))
 			return (NULL);
-		if (i == 0)
-		{
-			head = current_node;
-			prev = head;
-		}
-		else
-		{
-			prev->next = current_node;
-			prev = current_node;
-		}
+		conjoin_node(i, &current_node, &head, &prev);
 		current_node->head = head;
 		i++;
 	}

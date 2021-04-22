@@ -29,9 +29,9 @@ void	p_thinking(t_phi *p)
 
 void	wait_for(long unsigned time)
 {
-    long unsigned start;
+	long unsigned	start;
 
-    start = get_actual_time();
-    while (get_actual_time() - start < time)
-        usleep(10);
+	start = get_actual_time();
+	while (get_actual_time() - start < time)
+		usleep(10);
 }

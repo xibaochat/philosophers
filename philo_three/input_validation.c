@@ -49,7 +49,7 @@ int	has_invalid_char(char **av)
 
 int	valid_input(int	ac, char **av)
 {
-	int v;
+	int	v;
 
 	if (!(ac == 5 || ac == 6 ))
 	{

@@ -1,14 +1,14 @@
-# include "philo_one.h"
+#include "philo_one.h"
 
 void	*monitoring(void *arg)
 {
-	t_phi *phi;
+	t_phi	*phi;
 
 	phi = (t_phi *)arg;
 	while (phi && !phi->simu->has_death)
 	{
 		if (phi->simu->is_died)
-			break;
+			break ;
 		if (get_actual_time() - phi->last_meal > phi->simu->die_time)
 		{
 			pthread_mutex_lock(&phi->eat_lock);
@@ -16,7 +16,7 @@ void	*monitoring(void *arg)
 			phi->simu->is_died = 1;
 			printf_message(phi, "died");
 			pthread_mutex_unlock(&phi->eat_lock);
-			break;
+			break ;
 		}
 		if (!phi->next)
 			phi = phi->head;

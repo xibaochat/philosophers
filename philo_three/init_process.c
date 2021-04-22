@@ -14,5 +14,7 @@ void	init_process(t_phi *phi, int i)
 		pthread_join(phi->monitor, NULL);
 	}
 	else
+	{
 		phi->simu->pid[i] = pid;
+	}
 }

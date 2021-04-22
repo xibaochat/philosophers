@@ -1,4 +1,4 @@
-# include "philo_two.h"
+#include "philo_two.h"
 
 void	close_sem(t_phi *head)
 {
@@ -17,7 +17,6 @@ void	close_sem(t_phi *head)
 void	ft_free_var(t_phi *head)
 {
 	t_phi	*tmp;
-
 
 	close_sem(head);
 	if (head->simu)

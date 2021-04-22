@@ -1,17 +1,5 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   philo_three.h.c                                      :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: xinwang <xinwang@student.42.fr>            +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/21 03:48:54 by xinwang           #+#    #+#             */
-/*   Updated: 2019/11/21 03:49:08 by xinwang          ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
-#ifndef PHILO_TWO_H
-# define PHILO_TWO_H
+#ifndef PHILO_THREE_H
+# define PHILO_THREE_H
 
 # include <pthread.h>
 # include <stdio.h>
@@ -22,7 +10,6 @@
 # include <semaphore.h>
 # include <fcntl.h>
 # include <sys/wait.h>
-
 
 # define WARNING_MESSAGE "Please use this command :\n"
 # define ARG1 "./philo_three number_of_philosopher "
@@ -109,6 +96,5 @@ char			*ft_strjoin(char const *s1, char const *s2);
 char			*ft_itoa(int n);
 void			eat(t_phi *p);
 void			init_process(t_phi *phi, int i);
-
 
 #endif

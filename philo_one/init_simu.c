@@ -14,7 +14,7 @@ void	init_simulation_info(t_simu *simu, char **av)
 	}
 	else
 	{
-		simu->has_option	= 0;
+		simu->has_option = 0;
 		simu->nb_times_eat = -1;
 	}
 	simu->has_death = 0;

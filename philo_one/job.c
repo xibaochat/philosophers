@@ -1,6 +1,6 @@
 #include "philo_one.h"
 
-void		*job(void *arg)
+void	*job(void *arg)
 {
 	t_phi			*phi;
 	pthread_mutex_t	*fst_fork;
@@ -13,19 +13,15 @@ void		*job(void *arg)
 	{
 		p_eat(phi, fst_fork, scd_fork);
 		if (phi->simu->has_death || (phi->simu->has_option
-			&& phi->actual_eat_time >= phi->simu->nb_times_eat))
-        {
-            phi->simu->is_died = 1;
-            break;
-        }
+				&& phi->actual_eat_time >= phi->simu->nb_times_eat))
+		{
+			phi->simu->is_died = 1;
+			break ;
+		}
 		if (!phi->simu->has_death)
 			p_sleep(phi);
-		else
-			break;
 		if (!phi->simu->has_death)
 			p_thinking(phi);
-		else
-			break;
 	}
 	return (NULL);
 }

@@ -106,5 +106,4 @@ char			*ft_strjoin(char const *s1, char const *s2);
 char			*ft_itoa(int n);
 void			eat(t_phi *p);
 
-
 #endif
