@@ -14,9 +14,12 @@ void	*monitoring(void *arg)
 			sem_wait(phi->eating);
 			phi->simu->has_death = 1;
 			phi->simu->is_died = 1;
+			printf_message(phi, "died");
+			sem_wait(phi->simu->display);
 			sem_post(phi->eating);
 			exit(0);
 		}
+		usleep(10);
 	}
 	return (NULL);
 }

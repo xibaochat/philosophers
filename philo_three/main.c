@@ -48,9 +48,9 @@ void	track_child(t_phi *phi)
 		status_value = WEXITSTATUS(status);
 		if (status_value == 0)
 		{
-			printf_message(phi, "died");
 			while (++i < phi->simu->nb_p)
 				kill(phi->simu->pid[i], SIGKILL);
+			sem_post(phi->simu->display);
 		}
 	}
 }

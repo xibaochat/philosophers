@@ -17,6 +17,8 @@ void	ft_free_var(t_phi *head)
 {
 	t_phi	*tmp;
 
+	if (head->simu->has_death && !head->simu->is_died)
+		printf("All meals are finished\n");
 	if (head->simu)
 	{
 		if (head->simu->fork)
