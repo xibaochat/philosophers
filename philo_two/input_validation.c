@@ -14,10 +14,10 @@ int	option_is_less_zero(char *s)
 {
 	if (s)
 	{
-		if (ft_atoi(s) <= 0)
+		if (ft_atoi(s) <= 0 || ft_atoi(s) >= 4294967296)
 		{
 			printf(MES_MUST_EAT);
-			printf("should more than 0\n");
+			printf("Invalid argument\n");
 			return (1);
 		}
 	}
@@ -38,7 +38,6 @@ int	has_invalid_char(char **av)
 			if (!ft_isdigit(av[i][j]))
 			{
 				show_err_message("Input contains invalid char\n");
-				printf("char is %d i is %d j is %d", av[i][j], i, j);
 				return (1);
 			}
 			j++;
@@ -54,6 +53,11 @@ int	valid_input(int	ac, char **av)
 	if (!(ac == 5 || ac == 6 ))
 	{
 		show_err_message("Input is incomplete\n");
+		return (1);
+	}
+	if (av[1] && !ft_atoi(av[1]))
+	{
+		show_err_message("Nb of pilosophers should be more than 0\n");
 		return (1);
 	}
 	v = has_invalid_char(av);

@@ -38,7 +38,7 @@ t_phi	*init_phi_node(char **av, t_simu *simu)
 	while (i < simu->nb_p)
 	{
 		current_node = (t_phi *)malloc(sizeof(t_phi));
-		memset(current_node, 0, sizeof(current_node));
+		memset(current_node, 0, sizeof(t_phi));
 		init_phi_node_data(i, simu->nb_p, current_node, simu);
 		conjoin_node(i, &current_node, &head, &prev);
 		current_node->head = head;

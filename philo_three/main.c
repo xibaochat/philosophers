@@ -42,15 +42,19 @@ void	track_child(t_phi *phi)
 	unsigned long	i;
 
 	i = -1;
-	waitpid(-1, &status, 0);
-	if ((WIFEXITED(status) || WIFSIGNALED(status)))
+	while (++i <  phi->simu->nb_p)
 	{
-		status_value = WEXITSTATUS(status);
-		if (status_value == 0)
+		waitpid(-1, &status, 0);
+		if ((WIFEXITED(status) || WIFSIGNALED(status)))
 		{
-			while (++i < phi->simu->nb_p)
-				kill(phi->simu->pid[i], SIGKILL);
-			sem_post(phi->simu->display);
+			status_value = WEXITSTATUS(status);
+			if (status_value == 0)
+			{
+				i = -1;
+				while (++i < phi->simu->nb_p)
+					kill(phi->simu->pid[i], SIGKILL);
+				sem_post(phi->simu->display);
+			}
 		}
 	}
 }

@@ -18,8 +18,12 @@ void	printf_message(t_phi *p, char *s)
 {
 	unsigned long	t;
 
+	if (p->simu->has_death && !p->simu->is_died)
+		return ;
 	pthread_mutex_lock(&p->simu->display);
 	t = p->simu->start_time;
 	printf("%ld %d %s\n", get_timestamp(t), p->phi_id + 1, s);
+	if (p->simu->has_death && p->simu->is_died)
+		p->simu->is_died = 0;
 	pthread_mutex_unlock(&p->simu->display);
 }

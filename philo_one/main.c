@@ -17,13 +17,23 @@ int	create_philosophers_threads(t_phi *phi)
 	t_phi	*tmp;
 
 	phi->simu->start_time = get_actual_time();
-	tmp = phi;
 	i = -1;
 	while (phi && ++i < phi->simu->nb_p)
 	{
-		if (pthread_create(&(phi->thread), NULL, &job, phi))
-			return (1);
-		usleep(10);
+		if (!(i % 2))
+			if (pthread_create(&(phi->thread), NULL, &job, phi))
+				return (1);
+		usleep(70);
+		phi = phi->next;
+	}
+	i = -1;
+	phi = tmp;
+	while (phi && ++i < phi->simu->nb_p)
+	{
+		if (i % 2)
+			if (pthread_create(&(phi->thread), NULL, &job, phi))
+				return (1);
+		usleep(70);
 		phi = phi->next;
 	}
 	return (0);
@@ -51,7 +61,7 @@ int	main(int ac, char **av)
 
 	err_input = valid_input(ac, av);
 	if (err_input)
-		return (0);
+		return (1);
 	simu = init_simu(av);
 	if (!simu)
 		return (1);

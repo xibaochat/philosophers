@@ -14,8 +14,9 @@ void	*monitoring(void *arg)
 			sem_wait(phi->eating);
 			phi->simu->has_death = 1;
 			phi->simu->is_died = 1;
-			printf_message(phi, "died");
 			sem_wait(phi->simu->display);
+			printf("%ld %d is died\n", \
+				   get_timestamp(phi->simu->start_time), phi->phi_id + 1);
 			sem_post(phi->eating);
 			exit(0);
 		}
