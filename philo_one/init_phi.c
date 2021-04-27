@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   change_env_var_value.c                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pnielly <pnielly@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/12/13 16:39:07 by xinwang           #+#    #+#             */
+/*   Updated: 2020/12/13 16:39:08 by xinwang          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "philo_one.h"
 
 void	init_phi_node_data(int i, int nb, t_phi *node, t_simu *simu)
@@ -25,7 +37,7 @@ void	conjoin_node(int i, t_phi **current_node, t_phi **head, t_phi **prev)
 	}
 }
 
-t_phi	*init_phi_node(char **av, t_simu *simu)
+t_phi	*init_phi_node(t_simu *simu)
 {
 	int				i;
 	t_phi			*prev;

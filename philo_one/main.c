@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pnielly <pnielly@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/12/13 16:39:07 by xinwang           #+#    #+#             */
+/*   Updated: 2020/12/13 16:39:08 by xinwang          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "philo_one.h"
 
-int	monitoring_threads(t_phi *phi)
+int		monitoring_threads(t_phi *phi)
 {
 	pthread_t	monitor;
 
@@ -11,13 +23,14 @@ int	monitoring_threads(t_phi *phi)
 	return (0);
 }
 
-int	create_philosophers_threads(t_phi *phi)
+int		create_philosophers_threads(t_phi *phi)
 {
 	int		i;
 	t_phi	*tmp;
 
 	phi->simu->start_time = get_actual_time();
 	i = -1;
+	tmp = phi;
 	while (phi && ++i < phi->simu->nb_p)
 	{
 		if (!(i % 2))
@@ -39,7 +52,7 @@ int	create_philosophers_threads(t_phi *phi)
 	return (0);
 }
 
-int	terminate_philosopher_threads(t_phi *phi)
+int		terminate_philosopher_threads(t_phi *phi)
 {
 	int	i;
 
@@ -53,7 +66,15 @@ int	terminate_philosopher_threads(t_phi *phi)
 	return (0);
 }
 
-int	main(int ac, char **av)
+void	destroy_var(t_phi *phi)
+{
+	destroy_mutex(phi);
+	if (!phi->simu->has_death && phi->simu->is_died)
+		printf("All meals eaten\n");
+	ft_free_var(phi);
+}
+
+int		main(int ac, char **av)
 {
 	int		err_input;
 	t_phi	*phi;
@@ -65,18 +86,16 @@ int	main(int ac, char **av)
 	simu = init_simu(av);
 	if (!simu)
 		return (1);
-	phi = init_phi_node(av, simu);
+	phi = init_phi_node(simu);
 	if (!phi)
 		return (1);
+	show_welcome_message();
 	if (create_philosophers_threads(phi))
 		return (err_create_thread(phi, P_THREAD_ERR));
 	if (monitoring_threads(phi))
 		return (err_create_thread(phi, MONITOR_THREAD_ERR));
 	if (terminate_philosopher_threads(phi))
 		return (err_terminate_thread(phi));
-	destroy_mutex(phi);
-	if (!phi->simu->has_death && phi->simu->is_died)
-		printf("All meals eaten\n");
-	ft_free_var(phi);
+	destroy_var(phi);
 	return (0);
 }

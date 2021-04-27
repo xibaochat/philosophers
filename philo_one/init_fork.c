@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   change_env_var_value.c                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pnielly <pnielly@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/12/13 16:39:07 by xinwang           #+#    #+#             */
+/*   Updated: 2020/12/13 16:39:08 by xinwang          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "philo_one.h"
 
-static int	get_next_fork_nb(int nb, int i)
+static int		get_next_fork_nb(int nb, int i)
 {
 	if (i + 1 >= nb)
 		return (0);
@@ -21,7 +33,7 @@ pthread_mutex_t	*init_mutex_fork(int nb)
 	return (fork);
 }
 
-void	init_phi_fork(int nb, pthread_mutex_t *f, t_phi *node)
+void			init_phi_fork(int nb, pthread_mutex_t *f, t_phi *node)
 {
 	int				next_id;
 

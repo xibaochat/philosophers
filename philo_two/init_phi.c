@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   change_env_var_value.c                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pnielly <pnielly@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/12/13 16:39:07 by xinwang           #+#    #+#             */
+/*   Updated: 2020/12/13 16:39:08 by xinwang          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "philo_two.h"
 
-int	init_phi_sem(int i, t_phi *phi)
+int		init_phi_sem(int i, t_phi *phi)
 {
 	char	*phi_n;
 
@@ -21,7 +33,7 @@ int	init_phi_sem(int i, t_phi *phi)
 	return (1);
 }
 
-void	init_phi_node_data(int i, int nb, t_phi *node, t_simu *simu)
+void	init_phi_node_data(int i, t_phi *node, t_simu *simu)
 {
 	node->simu = simu;
 	node->phi_id = i;
@@ -44,7 +56,7 @@ void	conjoin_node(int i, t_phi **current_node, t_phi **head, t_phi **prev)
 	}
 }
 
-t_phi	*init_phi_node(char **av, t_simu *simu)
+t_phi	*init_phi_node(t_simu *simu)
 {
 	int				i;
 	t_phi			*prev;
@@ -56,8 +68,8 @@ t_phi	*init_phi_node(char **av, t_simu *simu)
 	while (i < simu->nb_p)
 	{
 		current_node = (t_phi *)malloc(sizeof(t_phi));
-		memset(current_node, 0, sizeof(current_node));
-		init_phi_node_data(i, simu->nb_p, current_node, simu);
+		memset(current_node, 0, sizeof(t_phi));
+		init_phi_node_data(i, current_node, simu);
 		if (init_phi_sem(i, current_node))
 			return (NULL);
 		conjoin_node(i, &current_node, &head, &prev);

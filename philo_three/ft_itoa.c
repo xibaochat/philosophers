@@ -12,7 +12,7 @@
 
 #include "philo_three.h"
 
-static int	get_size(int n)
+static int		get_size(int n)
 {
 	int				size;
 
@@ -22,7 +22,7 @@ static int	get_size(int n)
 		size++;
 		n = -n;
 	}
-	while (n > 10)
+	while (n >= 10)
 	{
 		size++;
 		n = n / 10;
@@ -30,7 +30,7 @@ static int	get_size(int n)
 	return (size);
 }
 
-static char	*get_converted_str(char *str, unsigned int res, int *i)
+static char		*get_converted_str(char *str, unsigned int res, int *i)
 {
 	if (res >= 10)
 		get_converted_str(str, res / 10, i);
@@ -38,7 +38,7 @@ static char	*get_converted_str(char *str, unsigned int res, int *i)
 	return (str);
 }
 
-char	*ft_itoa(int n)
+char			*ft_itoa(int n)
 {
 	int				i;
 	unsigned int	res;

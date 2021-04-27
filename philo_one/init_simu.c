@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   change_env_var_value.c                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pnielly <pnielly@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/12/13 16:39:07 by xinwang           #+#    #+#             */
+/*   Updated: 2020/12/13 16:39:08 by xinwang          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "philo_one.h"
 
 void	init_simulation_info(t_simu *simu, char **av)
@@ -22,8 +34,6 @@ void	init_simulation_info(t_simu *simu, char **av)
 
 t_simu	*init_simu(char **av)
 {
-	int				nb_p;
-	unsigned long	start_time;
 	t_simu			*simu;
 
 	simu = (t_simu *)malloc(sizeof(t_simu));

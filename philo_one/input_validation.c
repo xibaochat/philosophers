@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   change_env_var_value.c                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pnielly <pnielly@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/12/13 16:39:07 by xinwang           #+#    #+#             */
+/*   Updated: 2020/12/13 16:39:08 by xinwang          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "philo_one.h"
 
 void	show_err_message(char *str)
@@ -10,11 +22,11 @@ void	show_err_message(char *str)
 	write(2, ARG4, ft_strlen(ARG4));
 }
 
-int	option_is_less_zero(char *s)
+int		option_is_less_zero(char *s)
 {
 	if (s)
 	{
-		if (ft_atoi(s) <= 0 || ft_atoi(s) >= 4294967296)
+		if (ft_atoi(s) <= 0)
 		{
 			printf(MES_MUST_EAT);
 			printf("Invalid argument\n");
@@ -24,7 +36,7 @@ int	option_is_less_zero(char *s)
 	return (0);
 }
 
-int	has_invalid_char(char **av)
+int		has_invalid_char(char **av)
 {
 	int	i;
 	int	j;
@@ -46,11 +58,11 @@ int	has_invalid_char(char **av)
 	return (0);
 }
 
-int	valid_input(int	ac, char **av)
+int		valid_input(int ac, char **av)
 {
 	int	v;
 
-	if (!(ac == 5 || ac == 6 ))
+	if (!(ac == 5 || ac == 6))
 	{
 		show_err_message("Input is incomplete\n");
 		return (1);

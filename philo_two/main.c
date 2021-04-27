@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pnielly <pnielly@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/12/13 16:39:07 by xinwang           #+#    #+#             */
+/*   Updated: 2020/12/13 16:39:08 by xinwang          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "philo_two.h"
 
 int	monitoring_threads(t_phi *phi)
@@ -16,6 +28,7 @@ int	create_philosophers_threads(t_phi *phi)
 	int		i;
 	t_phi	*tmp;
 
+	tmp = phi;
 	phi->simu->start_time = get_actual_time();
 	i = -1;
 	while (phi && ++i < phi->simu->nb_p)
@@ -65,9 +78,10 @@ int	main(int ac, char **av)
 	simu = init_simu(av);
 	if (!simu)
 		return (1);
-	phi = init_phi_node(av, simu);
+	phi = init_phi_node(simu);
 	if (!phi)
 		return (1);
+	show_welcome_message();
 	if (create_philosophers_threads(phi))
 		return (err_create_thread(phi, P_THREAD_ERR));
 	if (monitoring_threads(phi))

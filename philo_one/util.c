@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   change_env_var_value.c                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pnielly <pnielly@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/12/13 16:39:07 by xinwang           #+#    #+#             */
+/*   Updated: 2020/12/13 16:39:08 by xinwang          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "philo_one.h"
 
 static int	is_space(char c)
@@ -15,7 +27,7 @@ static int	get_start_index(char *str)
 	return (i);
 }
 
-int	ft_atoi(const char *s)
+int			ft_atoi(const char *s)
 {
 	int		sign;
 	int		res;
@@ -40,7 +52,7 @@ int	ft_atoi(const char *s)
 	return (sign * res);
 }
 
-size_t	ft_strlen(const char *str)
+size_t		ft_strlen(const char *str)
 {
 	size_t	i;
 	size_t	lens;

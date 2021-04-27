@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pnielly <pnielly@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/12/13 16:39:07 by xinwang           #+#    #+#             */
+/*   Updated: 2020/12/13 16:39:08 by xinwang          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "philo_three.h"
 
-void	pilo_process(t_phi *phi)
+void		pilo_process(t_phi *phi)
 {
 	int		i;
 	t_phi	*tmp;
@@ -26,7 +38,7 @@ void	pilo_process(t_phi *phi)
 	}
 }
 
-void	kill_philo(t_phi *phi)
+void		kill_philo(t_phi *phi)
 {
 	int	i;
 
@@ -35,14 +47,14 @@ void	kill_philo(t_phi *phi)
 		kill(phi->simu->pid[i], SIGKILL);
 }
 
-void	track_child(t_phi *phi)
+void		track_child(t_phi *phi)
 {
 	int				status;
 	int				status_value;
-	unsigned long	i;
+	int				i;
 
 	i = -1;
-	while (++i <  phi->simu->nb_p)
+	while (++i < phi->simu->nb_p)
 	{
 		waitpid(-1, &status, 0);
 		if ((WIFEXITED(status) || WIFSIGNALED(status)))
@@ -54,17 +66,18 @@ void	track_child(t_phi *phi)
 				while (++i < phi->simu->nb_p)
 					kill(phi->simu->pid[i], SIGKILL);
 				sem_post(phi->simu->display);
+				return ;
 			}
 		}
 	}
+	printf("All meals eaten\n");
 }
 
-int	main(int ac, char **av)
+int			main(int ac, char **av)
 {
 	int			err_input;
 	t_phi		*phi;
 	t_simu		*simu;
-	pthread_t	monitor;
 
 	err_input = valid_input(ac, av);
 	if (err_input)
@@ -72,9 +85,10 @@ int	main(int ac, char **av)
 	simu = init_simu(av);
 	if (!simu)
 		return (1);
-	phi = init_phi_node(av, simu);
+	phi = init_phi_node(simu);
 	if (!phi)
 		return (1);
+	show_welcome_message();
 	pilo_process(phi);
 	track_child(phi);
 	ft_free_var(phi);
