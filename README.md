@@ -49,5 +49,5 @@ Once the binary is compiled, type:
 ```python
 ./[binary] #_of_philosophers time_to_die time_to_eat time_to_sleep [#_times_each_philosopher_must_eat]
 ```
-
+![gif](https://github.com/xibaochat/philosophers/blob/master/philo.gif)
 
