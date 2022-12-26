@@ -26,3 +26,8 @@ This project is also a good lesson in C optimization as we need to save every bi
 </td>
 </tr>
 </table>
+<p>
+philo_one: multi-threads and use of mutex<br>
+philo_two: multi-threads and use of semaphore<br>
+philo_three: multi-processes and use of semaphore<br>
+</p>
