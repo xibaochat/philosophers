@@ -1,6 +1,7 @@
 <h1 align="center">
    <b font size="15" face="arial" ><br><br>philosophers</font></b></h1>
    <p align="center">
+     
    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7b/An_illustration_of_the_dining_philosophers_problem.png/220px-An_illustration_of_the_dining_philosophers_problem.png">
 
    <p align="center">
