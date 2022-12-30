@@ -52,4 +52,9 @@ Once the binary is compiled, type:
 ```
 ![gif](https://github.com/xibaochat/philosophers/blob/master/philo.gif)
 
+## Subject
+[en_philosophers.pdf]
+https://github.com/xibaochat/philosophers/blob/master/philosophers_en.subject.pdf
+
+
 
